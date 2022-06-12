@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export COMPOSE_FILE=docker/docker-compose.yml
+
+case "$1" in
+  bash)
+    docker-compose run --service-ports --rm rubybase /bin/bash
+    ;;
+  build)
+    docker-compose build
+    ;;
+  down)
+    docker-compose down
+esac

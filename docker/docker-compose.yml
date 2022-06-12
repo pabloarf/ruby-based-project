@@ -1,0 +1,32 @@
+version: "3.4"
+
+volumes:
+  rubybase_bundle:
+
+services:
+  rubybase:
+    command: rails server
+    build:
+      target: runtime
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - 3000:3000
+    env_file: ../.env
+    volumes:
+      - ../:/var/www/app:cached
+      - rubybase_bundle:/bundle:cached
+      - ~/.bash_history:/root/.bash_history
+    environment:
+      BUNDLE_PATH: /bundle
+      RAILS_ENV: development
+    depends_on:
+      - rubybase_postgres
+  rubybase_postgres:
+    image: postgres:14.1
+    environment:
+      POSTGRES_USER: pablo
+      POSTGRES_PASSWORD: development
+      POSTGRES_DB: rubybase_development
+    ports:
+      - 5432:5432
