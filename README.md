@@ -20,10 +20,28 @@ Rails version = `6.1.3.1`
 cp .env.sample .env
 ```
 
+## Run with docker
+```
+bin/dev bash
+```
+
+## Run console
+
+```
+sh script/console.sh
+```
+
 ## Run server
 
 ```
-bundle exec rails server -b 0.0.0.0
+sh script/server.sh
+```
+
+## Create new rails project
+```
+# -T no tests
+# Use sprockets for assets
+bundle exec rails new . -T --database=postgresql --skip-webpack-install
 ```
 
 * Database creation
